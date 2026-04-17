@@ -60,13 +60,28 @@ export default function Checkout() {
   }
 
   return (
-    <div className="container" style={{ maxWidth: 900 }}>
-      <h2 style={{ marginBottom: 20, color: 'var(--naranja)' }}>⚓ Finalizar compra</h2>
+    <div className="container checkout-container">
+      <h2 className="checkout-titulo">⚓ Finalizar compra</h2>
 
       {error && <div className="alert alert-error">{error}</div>}
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: 20 }}>
-        <form onSubmit={handleSubmit} style={{ background: 'var(--carta)', padding: 24, borderRadius: 12, boxShadow: 'var(--shadow-sm)' }}>
+      <div className="checkout-grid">
+
+        <div className="checkout-resumen">
+          <h3 style={{ marginBottom: 14, color: 'var(--naranja)' }}>🛒 Resumen</h3>
+          {items.map(item => (
+            <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid var(--borde)', fontSize: 13 }}>
+              <span>{item.cantidad}× {item.descripcion.substring(0, 28)}</span>
+              <strong style={{ marginLeft: 8, whiteSpace: 'nowrap' }}>{formatearPrecio(item.subtotal)}</strong>
+            </div>
+          ))}
+          <div className="carrito-total" style={{ marginTop: 16, fontSize: 20 }}>
+            <span>Total</span>
+            <span>{formatearPrecio(total)}</span>
+          </div>
+        </div>
+
+        <form onSubmit={handleSubmit} className="checkout-form">
           <h3 style={{ marginBottom: 16, color: 'var(--naranja)' }}>📦 Datos para el envío</h3>
 
           <div className="form-row">
@@ -132,21 +147,6 @@ export default function Checkout() {
           </p>
         </form>
 
-        <div>
-          <div style={{ background: 'var(--carta)', padding: 20, borderRadius: 12, boxShadow: 'var(--shadow-sm)', position: 'sticky', top: 80 }}>
-            <h3 style={{ marginBottom: 14, color: 'var(--naranja)' }}>🛒 Resumen</h3>
-            {items.map(item => (
-              <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid var(--borde)', fontSize: 13 }}>
-                <span>{item.cantidad}× {item.descripcion.substring(0, 25)}...</span>
-                <strong>{formatearPrecio(item.subtotal)}</strong>
-              </div>
-            ))}
-            <div className="carrito-total" style={{ marginTop: 16, fontSize: 20 }}>
-              <span>Total</span>
-              <span>{formatearPrecio(total)}</span>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
