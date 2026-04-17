@@ -42,35 +42,36 @@ export default function MisPedidos() {
     <div className="container">
       <h2 style={{ marginBottom: 20, color: 'var(--naranja)' }}>📋 Mis pedidos</h2>
 
-      <table className="tabla">
-        <thead>
-          <tr>
-            <th>Pedido</th>
-            <th>Fecha</th>
-            <th>Total</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {pedidos.map(p => (
-            <tr key={p.id}>
-              <td><strong>#{p.id}</strong></td>
-              <td>{formatearFecha(p.fecha)}</td>
-              <td><strong>{formatearPrecio(p.total)}</strong></td>
-              <td><span className={`badge badge-${p.estado}`}>{p.estado}</span></td>
-              <td>
-                <button onClick={() => verDetalle(p.id)} className="btn-ghost">Ver detalle</button>
-                {p.estado === 'pendiente' && p.payment_url && (
-                  <a href={p.payment_url} className="btn btn-coral" style={{ marginLeft: 8, fontSize: 12, padding: '6px 12px' }}>
-                    💳 Pagar ahora
-                  </a>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="pedidos-lista">
+        {pedidos.map(p => (
+          <div key={p.id} className="pedido-card">
+            <div className="pedido-card-header">
+              <span className="pedido-card-id">Pedido #{p.id}</span>
+              <span className={`badge badge-${p.estado}`}>{p.estado}</span>
+            </div>
+            <div className="pedido-card-body">
+              <div className="pedido-card-dato">
+                <span className="pedido-card-label">Fecha</span>
+                <span>{formatearFecha(p.fecha)}</span>
+              </div>
+              <div className="pedido-card-dato">
+                <span className="pedido-card-label">Total</span>
+                <strong style={{ color: 'var(--dorado)', fontSize: 17 }}>{formatearPrecio(p.total)}</strong>
+              </div>
+            </div>
+            <div className="pedido-card-footer">
+              <button onClick={() => verDetalle(p.id)} className="btn btn-outline" style={{ fontSize: 13, padding: '7px 14px' }}>
+                📋 Ver detalle
+              </button>
+              {p.estado === 'pendiente' && p.payment_url && (
+                <a href={p.payment_url} className="btn btn-coral" style={{ fontSize: 13, padding: '7px 14px' }}>
+                  💳 Pagar ahora
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
 
       {detalle && (
         <div onClick={() => setDetalle(null)} style={{
@@ -93,7 +94,8 @@ export default function MisPedidos() {
             </div>
 
             <h4 style={{ marginBottom: 8, color: 'var(--naranja)' }}>📦 Productos</h4>
-            <table className="tabla" style={{ marginBottom: 16 }}>
+            <div className="tabla-scroll" style={{ marginBottom: 16 }}>
+            <table className="tabla">
               <thead>
                 <tr><th>Código</th><th>Producto</th><th>Cant.</th><th>Subtotal</th></tr>
               </thead>
@@ -108,6 +110,7 @@ export default function MisPedidos() {
                 ))}
               </tbody>
             </table>
+            </div>
 
             <div style={{ background: 'var(--espuma)', padding: 14, borderRadius: 8, marginBottom: 14 }}>
               <h4 style={{ color: 'var(--naranja)', marginBottom: 6 }}>📍 Envío</h4>

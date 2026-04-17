@@ -527,6 +527,50 @@ select option { background: var(--carta-2); color: var(--texto); }
   border: 1px solid var(--borde);
 }
 
+/* ===== Mis Pedidos - tarjetas ===== */
+.pedidos-lista { display: flex; flex-direction: column; gap: 12px; }
+.pedido-card {
+  background: var(--carta);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.pedido-card:hover { border-color: var(--naranja); }
+.pedido-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(249,115,22,0.07);
+  border-bottom: 1px solid var(--borde);
+}
+.pedido-card-id { font-weight: 700; color: var(--texto); font-size: 15px; }
+.pedido-card-body {
+  display: flex;
+  gap: 0;
+  padding: 12px 16px;
+}
+.pedido-card-dato {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.pedido-card-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--texto-sec);
+}
+.pedido-card-footer {
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--borde);
+  flex-wrap: wrap;
+}
+
 /* ===== Checkout ===== */
 .checkout-container { max-width: 960px; }
 .checkout-titulo { margin-bottom: 20px; color: var(--naranja); }
