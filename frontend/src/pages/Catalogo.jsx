@@ -16,9 +16,10 @@ export default function Catalogo() {
   const { agregar } = useCarrito();
   const navigate = useNavigate();
   const searchRef = useRef(null);
+  const [searchReadOnly, setSearchReadOnly] = useState(true);
 
   useEffect(() => {
-    const t = setTimeout(() => searchRef.current?.blur(), 100);
+    const t = setTimeout(() => setSearchReadOnly(false), 300);
     return () => clearTimeout(t);
   }, []);
 
@@ -73,6 +74,7 @@ export default function Catalogo() {
           type="text"
           placeholder="🔍 Buscar por nombre o código..."
           ref={searchRef}
+          readOnly={searchReadOnly}
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
         />
