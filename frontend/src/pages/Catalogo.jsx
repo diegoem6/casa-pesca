@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -15,6 +15,9 @@ export default function Catalogo() {
   const { user } = useAuth();
   const { agregar } = useCarrito();
   const navigate = useNavigate();
+  const searchRef = useRef(null);
+
+  useEffect(() => { searchRef.current?.blur(); }, []);
 
   const cargar = async () => {
     try {
@@ -56,7 +59,7 @@ export default function Catalogo() {
   return (
     <div className="container">
       <section className="hero">
-        <h1>🎣 Bienvenidos a la casa del Locu Viejo</h1>
+        <h1>Bienvenidos a la casa del Locu Viejo</h1>
         <p>Todo el equipamiento que necesitás para tu próxima jornada en el agua. Cañas, reeles, líneas, señuelos y mucho más.</p>
       </section>
 
@@ -66,6 +69,7 @@ export default function Catalogo() {
         <input
           type="text"
           placeholder="🔍 Buscar por nombre o código..."
+          ref={searchRef}
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
         />

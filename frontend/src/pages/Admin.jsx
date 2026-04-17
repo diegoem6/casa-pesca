@@ -7,14 +7,14 @@ export default function Admin() {
 
   return (
     <div className="container">
-      <h2 style={{ marginBottom: 20, color: 'var(--azul-profundo)' }}>⚓ Panel de administración</h2>
+      <h2 style={{ marginBottom: 20, color: 'var(--naranja)' }}>⚓ Panel de administración</h2>
 
       <div style={{ display: 'flex', gap: 8, marginBottom: 20, borderBottom: '2px solid var(--borde)' }}>
         <button
           className={`btn-ghost ${tab === 'productos' ? '' : ''}`}
           onClick={() => setTab('productos')}
           style={{
-            borderBottom: tab === 'productos' ? '3px solid var(--azul-mar)' : 'none',
+            borderBottom: tab === 'productos' ? '3px solid var(--naranja)' : 'none',
             borderRadius: 0,
             color: tab === 'productos' ? 'var(--azul-profundo)' : 'var(--gris-niebla)',
             fontWeight: tab === 'productos' ? 700 : 500,
@@ -27,7 +27,7 @@ export default function Admin() {
           onClick={() => setTab('pedidos')}
           className="btn-ghost"
           style={{
-            borderBottom: tab === 'pedidos' ? '3px solid var(--azul-mar)' : 'none',
+            borderBottom: tab === 'pedidos' ? '3px solid var(--naranja)' : 'none',
             borderRadius: 0,
             color: tab === 'pedidos' ? 'var(--azul-profundo)' : 'var(--gris-niebla)',
             fontWeight: tab === 'pedidos' ? 700 : 500,
@@ -73,7 +73,7 @@ function AdminProductos() {
       {mensaje && <div className={`alert alert-${mensaje.tipo}`}>{mensaje.texto}</div>}
 
       <div className="admin-header" style={{ marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h3 style={{ color: 'var(--azul-mar)' }}>{productos.length} productos</h3>
+        <h3 style={{ color: 'var(--naranja)' }}>{productos.length} productos</h3>
         <button onClick={() => setEditando({})} className="btn btn-primary">+ Nuevo producto</button>
       </div>
 
@@ -186,11 +186,11 @@ function FormProducto({ producto, onCancel, onSave }) {
       display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20
     }}>
       <div onClick={(e) => e.stopPropagation()} style={{
-        background: 'white', borderRadius: 14, padding: 30, maxWidth: 600, width: '100%',
+        background: 'var(--carta)', borderRadius: 14, padding: 30, maxWidth: 600, width: '100%',
         maxHeight: '90vh', overflowY: 'auto'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
-          <h3 style={{ color: 'var(--azul-profundo)' }}>
+          <h3 style={{ color: 'var(--naranja)' }}>
             {producto ? '✏️ Editar producto' : '➕ Nuevo producto'}
           </h3>
           <button onClick={onCancel} className="btn-ghost">✕</button>
@@ -345,17 +345,17 @@ function AdminPedidos() {
           display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20
         }}>
           <div onClick={(e) => e.stopPropagation()} style={{
-            background: 'white', borderRadius: 14, padding: 30, maxWidth: 700, width: '100%',
+            background: 'var(--carta)', borderRadius: 14, padding: 30, maxWidth: 700, width: '100%',
             maxHeight: '90vh', overflowY: 'auto'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12 }}>
-              <h3 style={{ color: 'var(--azul-profundo)' }}>Pedido #{detalle.id}</h3>
+              <h3 style={{ color: 'var(--naranja)' }}>Pedido #{detalle.id}</h3>
               <button onClick={() => setDetalle(null)} className="btn-ghost">✕</button>
             </div>
 
             <div style={{ marginBottom: 14, display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
               <span className={`badge badge-${detalle.estado}`}>{detalle.estado}</span>
-              <span style={{ color: 'var(--gris-niebla)', fontSize: 13 }}>
+              <span style={{ color: 'var(--texto-sec)', fontSize: 13 }}>
                 {formatearFecha(detalle.fecha)}
               </span>
               <select
@@ -368,7 +368,7 @@ function AdminPedidos() {
             </div>
 
             <div style={{ background: 'var(--espuma)', padding: 14, borderRadius: 8, marginBottom: 14 }}>
-              <h4 style={{ color: 'var(--azul-mar)', marginBottom: 6 }}>📍 Envío</h4>
+              <h4 style={{ color: 'var(--naranja)', marginBottom: 6 }}>📍 Envío</h4>
               <p style={{ fontSize: 13, lineHeight: 1.6 }}>
                 <strong>{detalle.nombre_envio} {detalle.apellido_envio}</strong> · CI: {detalle.documento}<br/>
                 ✉️ {detalle.email_envio} · 📞 {detalle.telefono_envio}<br/>
@@ -377,7 +377,7 @@ function AdminPedidos() {
               </p>
             </div>
 
-            <h4 style={{ marginBottom: 8, color: 'var(--azul-mar)' }}>📦 Productos</h4>
+            <h4 style={{ marginBottom: 8, color: 'var(--naranja)' }}>📦 Productos</h4>
             <table className="tabla">
               <thead>
                 <tr><th>Código</th><th>Producto</th><th>Cant.</th><th>P. Unit.</th><th>Subtotal</th></tr>

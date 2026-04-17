@@ -18,12 +18,12 @@ export default function CheckoutResult({ tipo }) {
 
   return (
     <div className="container">
-      <div style={{ background: 'white', padding: 40, borderRadius: 14, boxShadow: 'var(--shadow-md)', textAlign: 'center', maxWidth: 600, margin: '40px auto' }}>
+      <div style={{ background: 'var(--carta)', padding: 40, borderRadius: 14, boxShadow: 'var(--shadow-md)', textAlign: 'center', maxWidth: 600, margin: '40px auto' }}>
         <div style={{ fontSize: 80, marginBottom: 20 }}>{exito ? '🎣' : '⚠️'}</div>
         <h2 style={{ color: exito ? 'var(--verde-alga)' : 'var(--rojo-coral)', marginBottom: 12 }}>
           {exito ? '¡Pesca exitosa!' : 'Pago cancelado'}
         </h2>
-        <p style={{ color: 'var(--gris-niebla)', marginBottom: 20 }}>
+        <p style={{ color: 'var(--texto-sec)', marginBottom: 20 }}>
           {exito
             ? 'Tu pedido fue recibido. En breve recibirás la confirmación por email cuando el pago se acredite.'
             : 'El pago fue cancelado o no pudo completarse. Tu pedido quedó pendiente, podés reintentar el pago desde Mis Pedidos.'}
@@ -32,8 +32,8 @@ export default function CheckoutResult({ tipo }) {
         {pedido && (
           <div style={{ background: 'var(--espuma)', padding: 16, borderRadius: 10, marginBottom: 20, textAlign: 'left' }}>
             <div><strong>Pedido #{pedido.id}</strong></div>
-            <div style={{ fontSize: 13, color: 'var(--gris-niebla)' }}>{formatearFecha(pedido.fecha)}</div>
-            <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--azul-profundo)', marginTop: 6 }}>
+            <div style={{ fontSize: 13, color: 'var(--texto-sec)' }}>{formatearFecha(pedido.fecha)}</div>
+            <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--dorado)', marginTop: 6 }}>
               {formatearPrecio(pedido.total)}
             </div>
           </div>

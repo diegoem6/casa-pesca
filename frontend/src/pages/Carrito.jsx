@@ -25,7 +25,7 @@ export default function Carrito() {
 
   return (
     <div className="container">
-      <h2 style={{ marginBottom: 20, color: 'var(--azul-profundo)' }}>🛒 Tu carrito</h2>
+      <h2 style={{ marginBottom: 20, color: 'var(--dorado)' }}>🛒 Tu carrito</h2>
 
       {items.map(item => (
         <div className="carrito-item" key={item.id}>
@@ -39,7 +39,7 @@ export default function Carrito() {
           <div>
             <div style={{ fontSize: 11, color: 'var(--madera)', fontWeight: 600 }}>{item.codigo}</div>
             <div style={{ fontWeight: 500, marginBottom: 4 }}>{item.descripcion}</div>
-            <div style={{ fontSize: 13, color: 'var(--gris-niebla)' }}>
+            <div style={{ fontSize: 13, color: 'var(--texto-sec)' }}>
               {formatearPrecio(item.precio_lista)} c/u
             </div>
           </div>
@@ -57,7 +57,7 @@ export default function Carrito() {
             >+</button>
           </div>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--azul-profundo)' }}>
+            <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--dorado)' }}>
               {formatearPrecio(item.subtotal)}
             </div>
             <button onClick={() => eliminar(item.id)} className="btn-ghost" style={{ color: 'var(--rojo-coral)', fontSize: 12, marginTop: 4 }}>

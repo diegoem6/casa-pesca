@@ -61,13 +61,13 @@ export default function Checkout() {
 
   return (
     <div className="container" style={{ maxWidth: 900 }}>
-      <h2 style={{ marginBottom: 20, color: 'var(--azul-profundo)' }}>⚓ Finalizar compra</h2>
+      <h2 style={{ marginBottom: 20, color: 'var(--naranja)' }}>⚓ Finalizar compra</h2>
 
       {error && <div className="alert alert-error">{error}</div>}
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: 20 }}>
-        <form onSubmit={handleSubmit} style={{ background: 'white', padding: 24, borderRadius: 12, boxShadow: 'var(--shadow-sm)' }}>
-          <h3 style={{ marginBottom: 16, color: 'var(--azul-mar)' }}>📦 Datos para el envío</h3>
+        <form onSubmit={handleSubmit} style={{ background: 'var(--carta)', padding: 24, borderRadius: 12, boxShadow: 'var(--shadow-sm)' }}>
+          <h3 style={{ marginBottom: 16, color: 'var(--naranja)' }}>📦 Datos para el envío</h3>
 
           <div className="form-row">
             <div className="form-group">
@@ -127,14 +127,14 @@ export default function Checkout() {
           <button type="submit" className="btn btn-primary" disabled={enviando} style={{ width: '100%', fontSize: 16, padding: '14px' }}>
             {enviando ? '⏳ Procesando...' : '💳 Pagar con Mercado Pago'}
           </button>
-          <p style={{ fontSize: 12, color: 'var(--gris-niebla)', marginTop: 10, textAlign: 'center' }}>
+          <p style={{ fontSize: 12, color: 'var(--texto-sec)', marginTop: 10, textAlign: 'center' }}>
             Serás redirigido al checkout seguro de Mercado Pago para completar el pago.
           </p>
         </form>
 
         <div>
-          <div style={{ background: 'white', padding: 20, borderRadius: 12, boxShadow: 'var(--shadow-sm)', position: 'sticky', top: 80 }}>
-            <h3 style={{ marginBottom: 14, color: 'var(--azul-mar)' }}>🛒 Resumen</h3>
+          <div style={{ background: 'var(--carta)', padding: 20, borderRadius: 12, boxShadow: 'var(--shadow-sm)', position: 'sticky', top: 80 }}>
+            <h3 style={{ marginBottom: 14, color: 'var(--naranja)' }}>🛒 Resumen</h3>
             {items.map(item => (
               <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid var(--borde)', fontSize: 13 }}>
                 <span>{item.cantidad}× {item.descripcion.substring(0, 25)}...</span>

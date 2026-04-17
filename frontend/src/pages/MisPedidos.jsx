@@ -40,7 +40,7 @@ export default function MisPedidos() {
 
   return (
     <div className="container">
-      <h2 style={{ marginBottom: 20, color: 'var(--azul-profundo)' }}>📋 Mis pedidos</h2>
+      <h2 style={{ marginBottom: 20, color: 'var(--naranja)' }}>📋 Mis pedidos</h2>
 
       <table className="tabla">
         <thead>
@@ -78,21 +78,21 @@ export default function MisPedidos() {
           display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20
         }}>
           <div onClick={(e) => e.stopPropagation()} style={{
-            background: 'white', borderRadius: 14, padding: 30, maxWidth: 600, width: '100%',
+            background: 'var(--carta)', borderRadius: 14, padding: 30, maxWidth: 600, width: '100%',
             maxHeight: '85vh', overflowY: 'auto'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
-              <h3 style={{ color: 'var(--azul-profundo)' }}>Pedido #{detalle.id}</h3>
+              <h3 style={{ color: 'var(--naranja)' }}>Pedido #{detalle.id}</h3>
               <button onClick={() => setDetalle(null)} className="btn-ghost">✕</button>
             </div>
             <div style={{ marginBottom: 14 }}>
               <span className={`badge badge-${detalle.estado}`}>{detalle.estado}</span>
-              <span style={{ marginLeft: 10, color: 'var(--gris-niebla)', fontSize: 13 }}>
+              <span style={{ marginLeft: 10, color: 'var(--texto-sec)', fontSize: 13 }}>
                 {formatearFecha(detalle.fecha)}
               </span>
             </div>
 
-            <h4 style={{ marginBottom: 8, color: 'var(--azul-mar)' }}>📦 Productos</h4>
+            <h4 style={{ marginBottom: 8, color: 'var(--naranja)' }}>📦 Productos</h4>
             <table className="tabla" style={{ marginBottom: 16 }}>
               <thead>
                 <tr><th>Código</th><th>Producto</th><th>Cant.</th><th>Subtotal</th></tr>
@@ -110,7 +110,7 @@ export default function MisPedidos() {
             </table>
 
             <div style={{ background: 'var(--espuma)', padding: 14, borderRadius: 8, marginBottom: 14 }}>
-              <h4 style={{ color: 'var(--azul-mar)', marginBottom: 6 }}>📍 Envío</h4>
+              <h4 style={{ color: 'var(--naranja)', marginBottom: 6 }}>📍 Envío</h4>
               <p style={{ fontSize: 13 }}>
                 {detalle.nombre_envio} {detalle.apellido_envio}<br/>
                 {detalle.direccion}<br/>
