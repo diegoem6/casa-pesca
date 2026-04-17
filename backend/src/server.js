@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // Health check
-app.get('/api/health', (req, res) => {
+app.get('/api/health', (_req, res) => {
   res.json({ ok: true, servicio: 'casa-pesca-backend', fecha: new Date().toISOString() });
 });
 
@@ -34,10 +34,18 @@ app.use('/api/productos', productosRoutes);
 app.use('/api/carrito', carritoRoutes);
 app.use('/api/pedidos', pedidosRoutes);
 
-// 404
-app.use((req, res) => {
-  res.status(404).json({ error: 'Endpoint no encontrado' });
-});
+// Servir frontend en producción
+if (process.env.NODE_ENV === 'production') {
+  const frontendDist = path.join(__dirname, '../../frontend/dist');
+  app.use(express.static(frontendDist));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(frontendDist, 'index.html'));
+  });
+} else {
+  app.use((_req, res) => {
+    res.status(404).json({ error: 'Endpoint no encontrado' });
+  });
+}
 
 // Manejo central de errores
 app.use(errorHandler);
