@@ -44,8 +44,8 @@ export default function Navbar() {
               <span className="nav-link" style={{ opacity: 0.85 }}>
                 <span>👤</span><span className="nav-text">{user.nombre}</span>
               </span>
-              <button onClick={handleLogout} className="nav-link" style={{ background: 'rgba(231,76,60,0.85)' }}>
-                Salir
+              <button onClick={handleLogout} className="nav-link" style={{ background: 'transparent', color: '#ff8f8f' }}>
+                <span>🚪</span><span className="nav-text">Salir</span>
               </button>
             </>
           ) : (

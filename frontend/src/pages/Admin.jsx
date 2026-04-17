@@ -72,7 +72,7 @@ function AdminProductos() {
     <div>
       {mensaje && <div className={`alert alert-${mensaje.tipo}`}>{mensaje.texto}</div>}
 
-      <div style={{ marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="admin-header" style={{ marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h3 style={{ color: 'var(--azul-mar)' }}>{productos.length} productos</h3>
         <button onClick={() => setEditando({})} className="btn btn-primary">+ Nuevo producto</button>
       </div>
@@ -93,47 +93,49 @@ function AdminProductos() {
       {loading ? (
         <div className="loading">⏳ Cargando...</div>
       ) : (
-        <table className="tabla">
-          <thead>
-            <tr>
-              <th>Código</th>
-              <th>Descripción</th>
-              <th>Categoría</th>
-              <th>P. Compra</th>
-              <th>P. Lista</th>
-              <th>Stock</th>
-              <th>Estado</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {productos.map(p => (
-              <tr key={p.id} style={{ opacity: p.activo ? 1 : 0.5 }}>
-                <td><strong>{p.codigo}</strong></td>
-                <td style={{ fontSize: 13, maxWidth: 280 }}>{p.descripcion}</td>
-                <td>{labelCategoria(p.categoria)}</td>
-                <td>{p.precio_compra ? formatearPrecio(p.precio_compra) : '-'}</td>
-                <td><strong>{formatearPrecio(p.precio_lista)}</strong></td>
-                <td>
-                  <span className={p.stock === 0 ? 'stock-cero' : p.stock < 5 ? 'stock-bajo' : 'stock-ok'}>
-                    {p.stock}
-                  </span>
-                </td>
-                <td>
-                  {p.activo
-                    ? <span className="badge badge-pagado">Activo</span>
-                    : <span className="badge badge-cancelado">Inactivo</span>}
-                </td>
-                <td>
-                  <button onClick={() => setEditando(p)} className="btn-ghost">✏️</button>
-                  {p.activo && (
-                    <button onClick={() => eliminar(p.id)} className="btn-ghost" style={{ color: 'var(--rojo-coral)' }}>🗑</button>
-                  )}
-                </td>
+        <div className="tabla-scroll">
+          <table className="tabla">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Descripción</th>
+                <th>Categoría</th>
+                <th>P. Compra</th>
+                <th>P. Lista</th>
+                <th>Stock</th>
+                <th>Estado</th>
+                <th>Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {productos.map(p => (
+                <tr key={p.id} style={{ opacity: p.activo ? 1 : 0.5 }}>
+                  <td><strong>{p.codigo}</strong></td>
+                  <td style={{ fontSize: 13, maxWidth: 280 }}>{p.descripcion}</td>
+                  <td>{labelCategoria(p.categoria)}</td>
+                  <td>{p.precio_compra ? formatearPrecio(p.precio_compra) : '-'}</td>
+                  <td><strong>{formatearPrecio(p.precio_lista)}</strong></td>
+                  <td>
+                    <span className={p.stock === 0 ? 'stock-cero' : p.stock < 5 ? 'stock-bajo' : 'stock-ok'}>
+                      {p.stock}
+                    </span>
+                  </td>
+                  <td>
+                    {p.activo
+                      ? <span className="badge badge-pagado">Activo</span>
+                      : <span className="badge badge-cancelado">Inactivo</span>}
+                  </td>
+                  <td>
+                    <button onClick={() => setEditando(p)} className="btn-ghost">✏️</button>
+                    {p.activo && (
+                      <button onClick={() => eliminar(p.id)} className="btn-ghost" style={{ color: 'var(--rojo-coral)' }}>🗑</button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );
@@ -307,32 +309,34 @@ function AdminPedidos() {
       ) : pedidos.length === 0 ? (
         <div className="empty"><div className="empty-icon">📋</div><p>Sin pedidos</p></div>
       ) : (
-        <table className="tabla">
-          <thead>
-            <tr>
-              <th>#</th><th>Fecha</th><th>Cliente</th><th>Email</th>
-              <th>Total</th><th>Estado</th><th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {pedidos.map(p => (
-              <tr key={p.id}>
-                <td><strong>#{p.id}</strong></td>
-                <td style={{ fontSize: 13 }}>{formatearFecha(p.fecha)}</td>
-                <td>{p.nombre_envio} {p.apellido_envio}</td>
-                <td style={{ fontSize: 13 }}>{p.email}</td>
-                <td><strong>{formatearPrecio(p.total)}</strong></td>
-                <td><span className={`badge badge-${p.estado}`}>{p.estado}</span></td>
-                <td>
-                  <button onClick={async () => {
-                    const { data } = await api.get(`/pedidos/${p.id}`);
-                    setDetalle(data);
-                  }} className="btn-ghost">Ver</button>
-                </td>
+        <div className="tabla-scroll">
+          <table className="tabla">
+            <thead>
+              <tr>
+                <th>#</th><th>Fecha</th><th>Cliente</th><th>Email</th>
+                <th>Total</th><th>Estado</th><th>Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {pedidos.map(p => (
+                <tr key={p.id}>
+                  <td><strong>#{p.id}</strong></td>
+                  <td style={{ fontSize: 13 }}>{formatearFecha(p.fecha)}</td>
+                  <td>{p.nombre_envio} {p.apellido_envio}</td>
+                  <td style={{ fontSize: 13 }}>{p.email}</td>
+                  <td><strong>{formatearPrecio(p.total)}</strong></td>
+                  <td><span className={`badge badge-${p.estado}`}>{p.estado}</span></td>
+                  <td>
+                    <button onClick={async () => {
+                      const { data } = await api.get(`/pedidos/${p.id}`);
+                      setDetalle(data);
+                    }} className="btn-ghost">Ver</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
 
       {detalle && (
