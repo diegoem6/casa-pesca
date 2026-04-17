@@ -17,7 +17,10 @@ export default function Catalogo() {
   const navigate = useNavigate();
   const searchRef = useRef(null);
 
-  useEffect(() => { searchRef.current?.blur(); }, []);
+  useEffect(() => {
+    const t = setTimeout(() => searchRef.current?.blur(), 100);
+    return () => clearTimeout(t);
+  }, []);
 
   const cargar = async () => {
     try {
