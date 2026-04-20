@@ -1111,8 +1111,8 @@ select option { background: var(--bg-elev); color: var(--fg); }
   .bestsellers-header { flex-wrap: wrap; }
   .bestsellers-title { font-size: 20px; }
 
-  /* Catalog toolbar */
-  .catalog-toolbar { top: 56px; }
+  /* Catalog toolbar — no sticky en mobile */
+  .catalog-toolbar { position: static; }
   .catalog-toolbar-title h2 { font-size: 17px; margin-bottom: 8px; }
 
   /* Pills horizontal scroll */
