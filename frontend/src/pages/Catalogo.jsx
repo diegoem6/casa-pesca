@@ -25,6 +25,19 @@ export default function Catalogo() {
     return () => clearTimeout(t);
   }, []);
 
+  useEffect(() => {
+    const updateNavH = () => {
+      const nav = document.querySelector('.navbar');
+      if (nav) {
+        const h = Math.ceil(nav.getBoundingClientRect().height);
+        document.documentElement.style.setProperty('--navbar-h', `${h}px`);
+      }
+    };
+    updateNavH();
+    window.addEventListener('resize', updateNavH);
+    return () => window.removeEventListener('resize', updateNavH);
+  }, []);
+
   // Carga el producto destacado y los bestsellers desde la API
   useEffect(() => {
     api.get('/productos', { params: { destacado: true } })

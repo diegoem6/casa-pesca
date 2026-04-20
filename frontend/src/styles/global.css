@@ -1005,10 +1005,6 @@ select option { background: var(--bg-elev); color: var(--fg); }
 
 /* ===== Catalog sticky toolbar ===== */
 .catalog-toolbar {
-  position: sticky; top: 72px; z-index: 30;
-  background: color-mix(in oklab, var(--bg) 92%, transparent);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
   padding: 14px 0 12px;
   margin-bottom: 24px;
@@ -1112,7 +1108,6 @@ select option { background: var(--bg-elev); color: var(--fg); }
   .bestsellers-title { font-size: 20px; }
 
   /* Catalog toolbar — no sticky en mobile */
-  .catalog-toolbar { position: static; }
   .catalog-toolbar-title h2 { font-size: 17px; margin-bottom: 8px; }
 
   /* Pills horizontal scroll */
