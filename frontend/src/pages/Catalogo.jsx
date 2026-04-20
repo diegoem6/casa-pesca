@@ -83,7 +83,7 @@ export default function Catalogo() {
 
       {/* Hero */}
       <section className="hero">
-        <span className="hero-tag">◆ Colonia · Uruguay · Desde 2018</span>
+        <span className="hero-tag">◆ Colonia · Uruguay</span>
         <h1>Bienvenidos a la<br/>casa del <em>Locu Viejo.</em></h1>
         <p>Todo el equipamiento que necesitás para tu próxima jornada en el agua. Cañas, reeles, líneas, señuelos y mucho más.</p>
         <div className="hero-actions">
@@ -285,7 +285,7 @@ export default function Catalogo() {
         <div className="section-kicker">El Club</div>
         <h2 className="club-heading">Pasión de amigos</h2>
         <p className="club-desc">
-          Somos cuatro amigos de Colonia que un día dejamos de contarnos anécdotas de pesca y arrancamos a vivirlas. Tres lanchas, un mazo de cartas marcado, y una tienda donde conseguís lo que de verdad funciona en el Río de la Plata.
+          Somos cuatro amigos de Colonia que un día dejamos de contarnos anécdotas de pesca y arrancamos a vivirlas. Tenemos tres lanchas, un mazo de cartas marcado, y una tienda donde conseguís lo que de verdad funciona en el Río de la Plata.
         </p>
         <p className="club-sub">
           Si tenés dudas sobre qué llevar, escribinos. Te recomendamos de pescador a pescador — sin venderte humo.

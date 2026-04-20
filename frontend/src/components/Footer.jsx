@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="foot-inner">
         <div>
           <div className="foot-brand"><span className="mark">◆</span> EL LOCU VIEJO</div>
-          <p className="foot-desc">Tienda de artículos de pesca en Colonia del Sacramento, Uruguay. Pasión de amigos desde 2018.</p>
+          <p className="foot-desc">Tienda de artículos de pesca en Colonia del Sacramento, Uruguay. Pasión de amigos.</p>
         </div>
         <div>
           <h4>Tienda</h4>
