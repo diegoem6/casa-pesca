@@ -103,6 +103,7 @@ function AdminProductos() {
                 <th>P. Compra</th>
                 <th>P. Lista</th>
                 <th>Stock</th>
+                <th>Flags</th>
                 <th>Estado</th>
                 <th>Acciones</th>
               </tr>
@@ -119,6 +120,10 @@ function AdminProductos() {
                     <span className={p.stock === 0 ? 'stock-cero' : p.stock < 5 ? 'stock-bajo' : 'stock-ok'}>
                       {p.stock}
                     </span>
+                  </td>
+                  <td style={{ whiteSpace: 'nowrap' }}>
+                    {p.destacado && <span className="badge badge-pendiente" title="Destacado">⭐</span>}
+                    {p.bestseller && <span className="badge badge-enviado" title="Bestseller" style={{ marginLeft: 4 }}>🔥</span>}
                   </td>
                   <td>
                     {p.activo
@@ -147,11 +152,13 @@ function FormProducto({ producto, onCancel, onSave }) {
   const [form, setForm] = useState({
     codigo: producto?.codigo || '',
     descripcion: producto?.descripcion || '',
-    precio_compra: producto?.precio_compra || '',
-    precio_lista: producto?.precio_lista || '',
+    precio_compra: producto?.precio_compra ?? '',
+    precio_lista: producto?.precio_lista ?? '',
     categoria: producto?.categoria || 'canas',
     stock: producto?.stock ?? 0,
-    activo: producto?.activo ?? true
+    activo: producto?.activo ?? true,
+    destacado: producto?.destacado ?? false,
+    bestseller: producto?.bestseller ?? false,
   });
   const [imagen, setImagen] = useState(null);
   const [error, setError] = useState(null);
@@ -243,6 +250,21 @@ function FormProducto({ producto, onCancel, onSave }) {
                 <option value="false">No</option>
               </select>
             </div>
+          </div>
+
+          <div className="form-row" style={{ gap: 24, marginTop: 4 }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontWeight: 500 }}>
+              <input type="checkbox" checked={form.destacado}
+                onChange={(e) => setForm({...form, destacado: e.target.checked})}
+                style={{ width: 16, height: 16, accentColor: 'var(--accent)' }} />
+              ⭐ Producto destacado
+            </label>
+            <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontWeight: 500 }}>
+              <input type="checkbox" checked={form.bestseller}
+                onChange={(e) => setForm({...form, bestseller: e.target.checked})}
+                style={{ width: 16, height: 16, accentColor: 'var(--accent)' }} />
+              🔥 Bestseller
+            </label>
           </div>
 
           <div className="form-group">

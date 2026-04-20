@@ -4,7 +4,7 @@ const CATEGORIAS_VALIDAS = ['canas', 'reeles', 'lineas', 'anzuelos', 'plomos', '
 
 async function listar(req, res, next) {
   try {
-    const { categoria, busqueda, soloActivos = 'true' } = req.query;
+    const { categoria, busqueda, soloActivos = 'true', destacado, bestseller } = req.query;
     const conditions = [];
     const params = [];
     let idx = 1;
@@ -21,10 +21,19 @@ async function listar(req, res, next) {
       params.push(`%${busqueda.toLowerCase()}%`);
       idx++;
     }
+    if (destacado === 'true') {
+      conditions.push(`destacado = TRUE`);
+    }
+    if (bestseller === 'true') {
+      conditions.push(`bestseller = TRUE`);
+    }
 
     const where = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
+    // Incluye precio_compra cuando se piden todos (contexto admin)
+    const selectExtra = soloActivos === 'false' ? ', precio_compra' : '';
     const result = await db.query(
-      `SELECT id, codigo, descripcion, precio_lista, categoria, stock, imagen_url, fecha_alta, activo
+      `SELECT id, codigo, descripcion, precio_lista${selectExtra}, categoria, stock, imagen_url,
+              fecha_alta, activo, destacado, bestseller
        FROM productos ${where}
        ORDER BY fecha_alta DESC`,
       params
@@ -61,10 +70,13 @@ async function crear(req, res, next) {
       return res.status(400).json({ error: 'Categoría inválida' });
     }
 
+    const { destacado = false, bestseller = false } = req.body;
     const result = await db.query(
-      `INSERT INTO productos (codigo, descripcion, precio_compra, precio_lista, categoria, stock, imagen_url)
-       VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
-      [codigo, descripcion, precio_compra, precio_lista, categoria, stock, imagen_url]
+      `INSERT INTO productos (codigo, descripcion, precio_compra, precio_lista, categoria, stock, imagen_url, destacado, bestseller)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
+      [codigo, descripcion, precio_compra, precio_lista, categoria, stock, imagen_url,
+       destacado === 'true' || destacado === true,
+       bestseller === 'true' || bestseller === true]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
@@ -78,7 +90,7 @@ async function crear(req, res, next) {
 async function actualizar(req, res, next) {
   try {
     const { id } = req.params;
-    const { codigo, descripcion, precio_compra, precio_lista, categoria, stock, activo } = req.body;
+    const { codigo, descripcion, precio_compra, precio_lista, categoria, stock, activo, destacado, bestseller } = req.body;
     const imagen_url = req.file ? `/uploads/${req.file.filename}` : undefined;
 
     if (categoria && !CATEGORIAS_VALIDAS.includes(categoria)) {
@@ -105,6 +117,14 @@ async function actualizar(req, res, next) {
     if (activo !== undefined) {
       fields.push(`activo = $${idx++}`);
       params.push(activo === 'true' || activo === true);
+    }
+    if (destacado !== undefined) {
+      fields.push(`destacado = $${idx++}`);
+      params.push(destacado === 'true' || destacado === true);
+    }
+    if (bestseller !== undefined) {
+      fields.push(`bestseller = $${idx++}`);
+      params.push(bestseller === 'true' || bestseller === true);
     }
 
     if (fields.length === 0) {
